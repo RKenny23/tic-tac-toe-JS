@@ -9,16 +9,16 @@ section {
 
 .game-title {
   font-size: 4rem;
+  margin-bottom: 2rem;
 }
 
-.game-title span {
-  color:rgb(123, 199, 224);
+.game-status {
+  margin: 0;
 }
 
 .game-board {
   display: grid;
-  width: 500px;
-  height: 500px;
+  width: 606px;
   margin: 2rem auto;
   grid-template-columns: repeat(3, 1fr);
   box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
@@ -32,6 +32,8 @@ section {
 
 .cell {
   display: flex;
+  width: 200px;
+  height: 200px;
   justify-content: center;
   align-items: center;
   border: 1px solid black;
@@ -44,10 +46,9 @@ section {
 }
 
 .game-restart {
-  margin-top: 2rem;
   font-size: 2rem;
-  height: 100px;
-  width: 150px;
+  height: 50px;
+  width: 250px;
   border: 2px solid black;
   border-radius: 5px;
   background-color: lightgreen;

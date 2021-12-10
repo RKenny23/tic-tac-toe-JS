@@ -23,13 +23,14 @@ const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
 statusDisplay.innerHTML = currentPlayerTurn();
 
-function handleCellPlayed() {
+function handleCellPlayed(clickedCell, clickedCellIndex) {
   gameState[clickedCellIndex] = currentPlayer;
   clickedCell.innerHTML = currentPlayer;
 }
 
 function handlePlayerChange() {
-
+  currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+  statusDisplay.innerHTML = currentPlayerTurn();
 }
 
 function handleResultValidation() {
@@ -54,6 +55,16 @@ function handleResultValidation() {
     gameActive = false;
     return;
   }
+
+  let roundDraw = !gameState.includes('');
+
+  if (roundDraw) {
+    statusDisplay.innerHTML = drawMessage();
+    gameActive = false;
+    return;
+  }
+
+  handlePlayerChange();
 }
 
 function handleCellClick(clickedCellEvent) {
@@ -72,12 +83,18 @@ function handleCellClick(clickedCellEvent) {
   handleResultValidation();
 
 }
-function handleRestartGame() {
 
+function handleRestartGame() {
+  gameActive = true;
+  currentPlayer = 'X';
+  gameState = ['', '', '', '', '', '', '', '', ''];
+  statusDisplay.innerHTML = currentPlayerTurn();
+  document.querySelectorAll('.cell')
+            .forEach(cell => cell.innerHTML = '');
 }
 
 document.querySelectorAll('.cell').forEach(cell => 
   cell.addEventListener('click', handleCellClick));
 
-
-document.querySelector('.game-restart').addEventListener('click', handleRestartGame);
+document.querySelector('.game-restart')
+  .addEventListener('click', handleRestartGame);
